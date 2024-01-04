@@ -1,0 +1,65 @@
+{% extends 'adminnavbar.html' %}
+{% load static %}
+{% block content %}
+
+
+<head>
+  {% comment %} <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> {% endcomment %}
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+    body{
+      background: #bdc3c7;  
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+    background: linear-gradient(to bottom, #2c3e50, #bdc3c7); 
+    }
+    {% comment %} .row {
+      margin: 100px;
+    } {% endcomment %}
+  </style>
+</head>
+<body>
+<br><br><br>
+<div class="container">
+  <div class="panel panel-danger table-responsive">
+    <div class="panel-heading">
+      <h3 class="panel-title" style='color:red'><center>Total Customers</center></h3>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Picture</th>
+          <th>Age</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      {% for c in customers %}
+      <tr>
+        <td>{{c.user.first_name}}{{c.user.last_name}}</td>
+        <td> {{c.user.username}}</td>
+        <td> <img src="{{c.photo.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{c.age}}</td>
+        <td>{{c.number}}</td>
+        <td>{{c.address}}</td>
+        <td><a class="btn btn-danger btn-xs" href="{% url 'delete_customer_view' c.id  %}">Delete</span></a></td>
+
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+</body>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

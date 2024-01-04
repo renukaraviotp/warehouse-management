@@ -1,0 +1,86 @@
+{% extends 'clientnavbar.html' %}
+{% load static %}
+{% block content %}
+
+
+<style media="screen">
+  
+   body {
+    background: #bdc3c7;  
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+    background: linear-gradient(to bottom, #2c3e50, #bdc3c7);
+   }
+  .button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  
+  transition: all 0.5s;
+  cursor: pointer;
+  }
+
+  .button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  }
+
+  .button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+  }
+
+  .button:hover span {
+  padding-right: 25px;
+  }
+
+  .button:hover span:after {
+  opacity: 1;
+  right: 0;
+  }
+  
+
+</style>
+<br><br><br>
+<body style='background-color:#e397f0;'>
+<div class="container">
+
+        <div class="">
+            <center>
+            <img src="{{customer.photo.url}}"   alt="profile pic" class="img-rounded img-responsive" height='100px' />
+            </center>
+        </div>
+        <center>
+        <div class="">
+            <blockquote>
+                <p style='color:white;'>Username: {{request.user}}</p><p style='color:white;'>Name: {{request.user.first_name}} {{request.user.last_name}}</p> <small style='color:white;'><cite title="Source Title">Address: {{customer.address}}  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+            </blockquote>
+            <p style='color:white;'><i class="glyphicon glyphicon-phone"></i>Contact: {{customer.number}}
+            </p>
+            <p style='color:white;'>Email: {{request.user.email}}
+            </p>
+            <p style='color:white;'>Age: {{customer.age}}
+            </p>
+        </div>
+    </center>
+</div>
+<br>
+<div style="text-align: center;">
+  <a href="{% url "edit_profile_view" %}"><button class="btn btn-primary btn-lg" ><span>Edit Profile </span></button></a><br>
+  <div><a href="{% url "update_password" %}"><b style='color:black;'>Reset your password</b></a></div>
+</div>
+
+</body>
+<br><br><br><br><br><br>
+
+{% endblock content %}

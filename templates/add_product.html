@@ -1,0 +1,106 @@
+{% extends 'adminnavbar.html' %}
+{% load static %}
+{% block content %}
+
+
+<head>
+  {% comment %} <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>  {% endcomment %}
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    {% comment %} .row {
+      margin: 100px;
+    } {% endcomment %}
+
+    .float{
+	position:absolute;
+	width:70px;
+	height:70px;
+	bottom:60px;
+	right:60px;
+	background-color:#3eb54d;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 5px 5px 5px #505050;
+}
+body{
+  background: #bdc3c7;  
+background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+background: linear-gradient(to bottom, #2c3e50, #bdc3c7); 
+}
+th{
+  color:white;
+}
+td{
+  font-weight:500;
+}
+
+{% comment %} .my-float{
+	margin-top:22px;
+} {% endcomment %}
+  </style>
+</head>
+<body>
+<br><br><br>
+
+<div class="container">
+  <div class="panel panel-danger table-responsive">
+    <div class="panel-heading">
+      <h3 class="panel-title" style='color:red;'><center>Total Products</center></h3>
+    </div>
+    <table class="table table-hover table-bordered" border='1px' id="dev-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Initial Stock Quanity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      {% for p in products %}
+  {% if p %}
+
+      <tr>
+        <td> {{p.name}}</td>
+        <td> <img src="{{p.pimage.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{p.price}}</td>
+        <td>{{p.description}}</td>
+        <td>{{p.qty}}</td>
+        <td><a class="btn btn-primary btn-xs" href="{% url 'update_product_view' p.id  %}">Edit</span></a>
+          <a class="btn btn-danger btn-xs" href="{% url 'delete_product_view' p.id  %}">Delete</span></a></td>
+
+      </tr>
+      {%else%}
+      <br><br><br> 
+      <h1>No Products!!</h1>
+      {% endif %}
+      {% endfor %}
+    </table>
+    <br><br><br><br><br><br><br><br>
+    <a href="{% url "admin_add_product_view" %}" class="float">
+      <br>
+    ADD
+    </a>
+  </div>
+  
+</div>
+
+<!-- add product floating button -->
+{% comment %} <a href="{% url "admin_add_product_view" %}" class="float">
+  <br>
+ADD
+</a> {% endcomment %}
+</body>
+{% endblock content %}

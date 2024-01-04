@@ -1,0 +1,90 @@
+{% extends 'clientnavbar.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+
+</head>
+<style media="screen">
+
+.panel-title {display: inline;font-weight: bold;}
+.checkbox.pull-right { margin: 0; }
+.pl-ziro { padding-left: 0px; }
+
+</style>
+
+    
+
+<br><br>
+{% comment %} <center><i>This is a FAKE PAYMENT. Just for demo purpose</i></center> {% endcomment %}
+<br><br>
+<div class='container'>
+   
+<div class="container col-md-12" style="text-align:center;padding:0px 50px;">
+    <div class="row">
+        <div class="col-md-8" style="height:500px;">
+
+            <!-- Bootstrap Card Start -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Payment Details
+                    </h3>
+                    
+                </div>
+                <div class="card-body">
+                    <form role="form" method="post">
+                        <div class="form-group">
+                            <label for="cardNumber">
+                                CARD NUMBER
+                            </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx" required autofocus />
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4 col-md-4 pull-left">
+                                <div class="form-group">
+                                    <label for="expityMonth">
+                                        MONTH
+                                    </label>
+                                    <input type="text" class="form-control" id="expityMonth" placeholder="MM - 02" required />
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="expityYear">
+                                        EXPIRY DATE
+                                    </label>
+                                    <input type="text" class="form-control" id="expityYear" placeholder="YY - 22" required />
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-md-4 pull-right">
+                                <div class="form-group">
+                                    <label for="cvCode">
+                                        CV
+                                    </label>
+                                    <input type="password" class="form-control" id="cvCode" placeholder="CV - xxx" required />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Bootstrap Card End -->
+
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active">
+                    <a href="#"><span class="badge pull-right">{{total}}</span> Final Payment</a>
+                </li>
+            </ul>
+            <br />
+            <a href="{% url "payment_success" c.id %}" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+        </div>
+    </div>
+</div>
+
+</div>
+
+{% endblock content %}

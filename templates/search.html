@@ -1,0 +1,76 @@
+{% extends "clientnavbar.html" %}
+{% block content %}
+<head>
+  <style>
+    body{
+  background: #bdc3c7;  
+background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+background: linear-gradient(to bottom, #2c3e50, #bdc3c7); 
+}
+  </style>
+</head>
+<body>
+<br><br>
+<div class='container col-sm-4'>
+  <div class='container col-sm-4'>
+  <div>
+  <form action="{% url "searchid" %}">
+      <input type="search" name='search' class='form-control' placeholder='Search ID'>
+      <input type='submit' value='search' class='btn btn-primary' style='float-right; width:110px;' class='form-control'></input> 
+  </form>
+</div>
+</div>
+</div><br><br>
+<div class="container">
+    <br><br><br>
+    {% comment %} <div class='container'>
+    <form action="{% url "searchid" %}">
+        <input type="search" name='search' class='form-control'><br>
+        <button type='submit' class='btn btn-primary' style='float-right;'> Search</button> 
+    </form><br><br>
+  </div> {% endcomment %}
+    <div class="panel panel-danger table-responsive">
+      <div class="panel-heading">
+        <h3 class="panel-title" style='color:red'><center>My Orders</center></h3>
+      </div>
+      <table class="table table-hover table-bordered" id="dev-table">
+        <thead>
+          <tr>
+            <th>Tracking ID</th>
+            <th>Product Name</th>
+            {% comment %} <th>Quantity</th> {% endcomment %}
+            <th>Status</th>
+            <th>Delevered Status</th>
+            <th>Received Status</th>
+          </tr>
+        </thead>
+        {% for i in order %}
+        <tr>
+          <td>{{i.tracking_id}}</td>
+          <td>{{i.product.name}}</td>
+          {% comment %} <td>
+            {% for b in abc %}
+                
+                    {{ b.total_count }}
+                
+            {% endfor %}
+        </td> {% endcomment %}
+          <td>{{i.status}}</td>
+          <form action="{% url "receive" i.id %}" method='post'>
+            {% csrf_token %}
+          <td>
+            <select name='receive'> 
+                {% comment %} <option value="pending">Pending</option> {% endcomment %}
+                <option value="receive">Received</option>
+            </select>
+            <button type='submit' class='btn btn-primary'>Ok</button>
+           </td>
+         </form>
+         <td>{% if i.is_receive == 'True' %} Received {% endif %}</td> 
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</body><br><br><br><br>
+{% endblock %}

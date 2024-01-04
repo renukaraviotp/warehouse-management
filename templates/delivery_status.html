@@ -1,0 +1,72 @@
+{% extends 'deliverynavbar.html' %}
+{% load static %}
+{% block content %}
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    {% comment %} .row {
+      margin: 100px;
+    } {% endcomment %}
+  </style>
+</head>
+<br><br><br>
+<div class="container">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h6 class="panel-title">Total Orders</h6>
+    </div>
+    <table class="table table-hover table-bordered table-responsive" id="dev-table">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          {% comment %} <th>Contact</th> {% endcomment %}
+          <th>Shipping Address</th>
+          <th>Product</th>
+          <th>Image</th> 
+          <th>Status</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <!-- p for product, c for customer-->
+      {% for product,customers,order in data %}
+      <tr>
+        {% for c in customers %}
+        <td> {{c.user.first_name}}</td>
+        {% comment %} <td>{{c.number}}</td> {% endcomment %}
+        <td>{{order.address}}</td>
+
+        {% endfor %}
+        {% for p in product %}
+        <td> {{p.name}}</td>
+        <td> <img src="{{p.product_image.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{order.status}}</td>
+        <td><a class="btn btn-primary btn-xs" href="{% url 'update_status_view' order.id  %}"><span class="glyphicon glyphicon-edit"></td>
+
+        {% endfor %} 
+      </tr>
+      {% endfor %}
+      {% comment %} {% for order in orders %}
+        <tr>
+            <td>{{ order.client.name|default:"N/A" }}</td>
+            <td>{{ order.client.address|default:"N/A" }}</td>
+            <td>{{ order.product.name|default:"N/A" }}</td>
+            <td>{{ order.status }}</td>
+            <td><a class="btn btn-primary btn-xs" href="{% url 'update_order_view' order.id  %}"><span class="glyphicon glyphicon-edit">
+        </tr>
+    {% endfor %} {% endcomment %}
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

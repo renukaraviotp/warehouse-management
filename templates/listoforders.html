@@ -1,0 +1,82 @@
+{% extends 'adminnavbar.html' %}
+{% load static %}
+{% block content %}
+<head>
+  {% comment %} <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> {% endcomment %}
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+    body{
+      background: #bdc3c7;  
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+    background: linear-gradient(to bottom, #2c3e50, #bdc3c7); 
+    }
+    th{
+      color:white;
+    }
+    td{
+      font-weight:500;
+    }
+
+    {% comment %} .row {
+      margin: 100px;
+    } {% endcomment %}
+  </style>
+  <body>
+</head>
+<br><br>
+<div class="container">
+  <div class="panel panel-danger table-responsive">
+    <div class="panel-heading">
+      <h3 class="panel-title" style='color:red;'><center>Total Orders</center></h3><br>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Contact</th>
+          <th>Shipping Address</th>
+          <th>Product</th>
+          <th>Image</th>
+          <th>Status</th>
+          <th>Delivery Boy</th>
+          <th>Delivery Method</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <!-- p for product, c for customer-->
+      {% for c in orders %}
+      <tr>
+        
+        <td> {{c.client.user.first_name}}</td>
+        <td>{{c.client.number}}</td>
+        <td>{{c.address}}</td>
+        
+        
+
+       
+        <td> {{c.product.name}}</td>
+        <td> <img src="{{c.product.pimage.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{c.status}}</td> 
+        <td>{{c.deliveryboy.user.first_name}}</td>
+        <td>{{c.deliverymethod}}</td>
+        <td><a class="btn btn-danger btn-xs" href="{% url 'delete_order_view' c.id  %}">Delete</a></td>
+
+        
+
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+</body>
+<br><br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

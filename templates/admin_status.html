@@ -1,0 +1,45 @@
+{% extends "adminnavbar.html" %}
+{% block content %}
+<head>
+    <style>
+        body{
+            background: #bdc3c7;  
+          background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+          background: linear-gradient(to bottom, #2c3e50, #bdc3c7); 
+          }
+          th{
+            color:white;
+          }
+          td{
+            font-weight:500;
+          }
+    </style>
+</head>
+<body>
+<div class="container">
+    <br><br>
+    <div class="panel panel-danger table-responsive">
+      <div class="panel-heading">
+        <h3 class="panel-title" style='color:red'><center>Total Orders</center></h3>
+      </div>
+      <table class="table table-hover table-bordered" id="dev-table">
+        <thead>
+          <tr>
+            <th>Tracking ID</th>
+            <th>Product Name</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+          {% for i in s %}
+          <tr>
+          <td>{{i.tracking_id}}</td>
+          <td>{{i.product.name}}</td>
+          <td>{% if i.is_receive == 'True' and i.status == 'Delivered' %}Delivered {% else %} Pending {% endif %}</td>
+          </tr>
+          {% endfor %}
+      </table>
+    </div>
+  </div>
+</body>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

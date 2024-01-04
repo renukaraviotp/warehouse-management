@@ -1,0 +1,59 @@
+{% extends 'clientnavbar.html' %}
+{% load static %}
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<style>
+  body
+  {
+  font-family: 'Roboto', sans-serif;
+  {% comment %} background-image:url({% static "images/33.jpg" %}); {% endcomment %}
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:#403e4d;
+  background-position:center center;
+  }
+</style>
+<body>
+  
+
+<div class="container col-md-6" style="margin-top: 50px; margin-bottom: 250px;">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="h2 text-center">Enter Details</h1>
+    </div>
+    <div class="card-body">
+      <form method="POST" class="f2" action='{% url "accnt" %}'>
+        {% csrf_token %}
+        <div class="mb-6">
+          <label class="form-label">Address</label>
+          <textarea class="form-control" rows="3" name="a" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone</label>
+          <input type="text" class="form-control" name="p" min="10" max="10" pattern="[0-9]{10}" placeholder="phone" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Delivery Method:</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="delivery" value="Road" id="roadRadio">
+            <label class="form-check-label" for="roadRadio">Road</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="delivery" value="Ship" id="shipRadio">
+            <label class="form-check-label" for="shipRadio">Ship</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="delivery" value="Airline" id="airlineRadio">
+            <label class="form-check-label" for="airlineRadio">Airline</label>
+          </div>
+        </div>
+        <div class="text-center">
+          <input type="submit" class="btn btn-primary" value="Place Order"> 
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+{% endblock %}

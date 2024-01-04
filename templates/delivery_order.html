@@ -1,0 +1,78 @@
+{% extends "deliverynavbar.html" %}
+{% block content %}
+{% load static %}
+<head>
+  {% comment %} <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> {% endcomment %}
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+    body{
+      background: #bdc3c7;  
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  
+    background: linear-gradient(to bottom, #2c3e50, #bdc3c7); 
+    }
+    th{
+      color:white;
+    }
+    td{
+      font-weight:500;
+    }
+    {% comment %} .row {
+      margin: 100px;
+    } {% endcomment %}
+  </style>
+</head>
+<body>
+    <br><br><br>
+    <div class="patterns"> 
+      <div class="container col-10">
+        <div class="panel panel-danger table-responsive">
+          <div class="panel-heading">
+            <h3 class="panel-title" style='color:red;'><center>Total Orders</center></h3><br>
+          </div>
+          <table class="table table-hover table-bordered" id="dev-table">
+            <thead>
+              <tr>
+                <th>Tracking ID</th>
+                <th>Customer</th>
+                {% comment %} <th>Contact</th> {% endcomment %}
+                <th>Shipping Address</th>
+                <th>Product</th>
+                <th>Image</th>
+                {% comment %} <th>Location</th> {% endcomment %}
+                <th>Status</th>
+                <th>Update</th> 
+              </tr>
+            </thead>
+            <!-- p for product, c for customer-->
+            {% comment %} {% for product,customers,order,d in data %}  {% endcomment %}
+            
+              {% for c in d %}
+              <tr>
+              <td>{{c.tracking_id}}</td> 
+              <td> {{c.client.user.first_name}}</td>
+              {% comment %} <td>{{c.number}}</td> {% endcomment %}
+              <td>{{c.address}}</td>
+              <td> {{c.product.name}}</td>
+              <td> <img src="{{c.product.pimage.url}}" alt="Profile Pic" height="40px" width="40px" /></td>
+              <td>{{c.status}}</td>
+
+              <td><a class="btn btn-primary btn-xs" href="{% url 'update_order_view' c.id  %}">Update</a></td>
+      
+               
+            </tr>
+            {% endfor %} 
+          </table>
+        </div>
+      </div>
+  </div>
+   <br><br><br>
+  </body>
+{% endblock %}
